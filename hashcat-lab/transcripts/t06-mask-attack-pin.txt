@@ -1,0 +1,56 @@
+t06 — Mask attack: a four-digit PIN under MD5
+Date: 2026-10-30 08:58 UTC
+(The cracking run's output below has its routine startup lines —
+device banner, kernel limits, autotune — trimmed for length; the
+attack, warnings and the full closing status block are verbatim.)
+
+$ cat pin.md5
+fa8dbbcb682699544e4e8f2212115f73
+$ ./hashcat.bin -m 0 -a 3 pin.md5 "?d?d?d?d" --keyspace
+Usage: hashcat [options]... hash|hashfile|hccapxfile [dictionary|mask|directory]...
+
+Try --help for more help.
+[exit 254]
+$ ./hashcat.bin -a 3 "?d?d?d?d" --keyspace   # no hash file: keyspace needs none
+1000
+[exit 0]
+That 1000 is the count of the mask's outer loop. Hashcat splits the
+mask into a base part it feeds in and an amplifier part the device
+generates; the status screen in the run below multiplies them back
+together (Progress 10000/10000).
+$ ./hashcat.bin -m 0 -a 3 pin.md5 "?d?d?d?d"
+hashcat (v8.0.0) starting
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Raw-Hash
+This means that hashcat cannot use the full parallel power of your device(s).
+Hashcat is expecting at least 2048 base words but only got 48.8% of that.
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+                                                                                      [s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       Approaching final keyspace - workload adjusted.
+[s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       fa8dbbcb682699544e4e8f2212115f73:4071
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Hash.Target......: fa8dbbcb682699544e4e8f2212115f73
+Time.Started.....: Fri Oct 30 08:58:23 2026 (1 sec)
+Time.Estimated...: Fri Oct 30 08:58:24 2026 (0 secs)
+Kernel.Feature...: Pure Kernel (password length 0-256 bytes)
+Guess.Mask.......: ?d?d?d?d [4]
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:    38333 H/s (0.52ms) @ Accel:1024 Loops:10 Thr:1 Vec:16
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 10000/10000 (100.00%)
+Rejected.........: 0/10000 (0.00%)
+Restore.Point....: 0/1000 (0.00%), Amplifier:10
+Restore.Sub......: #01:0/0
+Candidate.Engine.: Device Generator
+Candidates.#01...: 1234 -> 6764
+Started: Fri Oct 30 08:58:20 2026
+Stopped: Fri Oct 30 08:58:24 2026
+[exit 0]

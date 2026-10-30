@@ -1,0 +1,36 @@
+t00 — Environment, the official download, and hashcat with no compute device yet
+Date: 2026-10-30 08:50 UTC
+
+$ uname -sr
+Linux 7.0.0-39-generic
+$ grep PRETTY_NAME /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+$ nproc
+2
+$ curl -sSL -O https://hashcat.net/files/hashcat-8.0.0.7z
+   (downloaded 20,350,217 bytes)
+$ sha256sum hashcat-8.0.0.7z
+9fa86e1bfd5dd898d3c83aa38a67b08db1ba5d2f5252dffa2af44a8c62585f49 hashcat-8.0.0.7z
+$ 7z x hashcat-8.0.0.7z   # the Linux program inside is hashcat.bin
+$ cd hashcat-8.0.0
+$ ./hashcat.bin --version
+v8.0.0
+$ ./hashcat.bin -I   # list the compute devices hashcat can see
+hashcat (v8.0.0) starting in backend information mode
+
+clGetPlatformIDs(): CL_PLATFORM_NOT_FOUND_KHR
+
+ATTENTION! No OpenCL, HIP or CUDA compatible platform found.
+
+You are probably missing the OpenCL, CUDA or HIP runtime installation.
+
+* AMD GPUs on Linux require this driver:
+  "AMD Radeon Software for Linux" with "ROCm"
+* Intel and AMD CPUs require this runtime:
+  "Intel CPU Runtime for OpenCL" or PoCL
+* Intel GPUs require this driver:
+  "Intel Graphics Compute Runtime" aka NEO
+* NVIDIA GPUs require this runtime and driver:
+  "NVIDIA CUDA Toolkit" (both runtime and driver included)
+
+[exit 255]

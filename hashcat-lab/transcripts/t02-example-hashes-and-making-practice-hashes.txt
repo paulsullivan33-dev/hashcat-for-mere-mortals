@@ -1,0 +1,25 @@
+t02 — Example hashes, and making the lab's own practice hashes
+Date: 2026-10-30 08:57 UTC
+
+$ ./hashcat.bin -m 0 --example-hashes | grep -E "Hash mode|Name|Example"
+Hash mode #0
+  Name................: MD5
+  Example.Hash.Format.: plain
+  Example.Hash........: 8743b52063cd84097a65d1633f5c74f5
+  Example.Pass........: hashcat
+$ ./hashcat.bin -m 7400 --example-hashes | grep -E "Hash mode|Name|Example"
+Hash mode #7400
+  Name................: sha256crypt $5$, SHA256 (Unix)
+  Example.Hash.Format.: plain
+  Example.Hash........: $5$7777657035274252$XftMj84MW.New1/ViLY5V4CM4Y7EBvfETaZsCW9vcJ8
+  Example.Pass........: hashcat
+
+Making practice hashes. Every password below was invented for this
+lab, and the wordlist (words.txt, 48 invented entries) contains them.
+
+$ printf %s bluebird7 | md5sum
+1119a110df24a17a303d7fd89ee59c4c  -
+$ printf %s 4071 | md5sum   # a PIN, for the mask attack
+fa8dbbcb682699544e4e8f2212115f73  -
+$ openssl passwd -5 -salt labsalt42 trumpet99   # sha256crypt, mode 7400
+$5$labsalt42$JiFI1KKMJivdPzkRywVZ8TW8abH6zCIp2yp.QjcuPT9

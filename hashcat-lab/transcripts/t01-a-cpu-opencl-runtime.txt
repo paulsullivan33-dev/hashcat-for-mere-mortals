@@ -1,0 +1,46 @@
+t01 — Giving hashcat a compute device: the PoCL CPU OpenCL runtime
+Date: 2026-10-30 08:56 UTC
+
+On a normal Ubuntu machine this step is one command:
+  sudo apt install pocl
+The lab machine's package database belongs to other tenants, so the
+lab fetched the same Ubuntu packages with a private apt state and
+unpacked (dpkg -x) them, unmodified, into a scratch folder instead:
+
+$ apt-get install --download-only pocl-opencl-icd   # 56 packages, 105 MB
+$ for d in *.deb; do dpkg -x $d root/; done
+$ cat root/etc/OpenCL/vendors/pocl.icd
+libpocl.so.2.12.0
+$ export LD_LIBRARY_PATH=$PWD/root/usr/lib/x86_64-linux-gnu:$PWD/root/usr/lib/llvm-16/lib
+$ export OCL_ICD_VENDORS=$PWD/root/etc/OpenCL/vendors/pocl.icd
+$ ./hashcat.bin -I
+hashcat (v8.0.0) starting in backend information mode
+
+Bridge units are selected by the hash mode, so none are listed here.
+Add -m <hash mode> to list the units that mode would use.
+
+OpenCL Info:
+============
+
+OpenCL Platform ID #1
+  Vendor..: The pocl project
+  Name....: Portable Computing Language
+  Version.: OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG
+
+  Backend Device ID #01
+    Type...........: CPU
+    Vendor.ID......: 1
+    Vendor.........: AuthenticAMD
+    Name...........: cpu-skylake-avx512-AMD EPYC 9D25 126-Core Processor
+    Version........: OpenCL 3.0 PoCL HSTR: cpu-x86_64-pc-linux-gnu-skylake-avx512
+    Processor(s)...: 2
+    Preferred.Thrd.: 1
+    Clock..........: 1497
+    Memory.Total...: 5887 MB (limited to 1024 MB allocatable in one block)
+    Memory.Free....: 2911 MB
+    Memory.Unified.: 1
+    Local.Memory...: 512 KB
+    OpenCL.Version.: OpenCL C 1.2 PoCL
+    Driver.Version.: 5.0+debian
+
+[exit 0]

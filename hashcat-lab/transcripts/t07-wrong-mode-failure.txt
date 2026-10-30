@@ -1,0 +1,26 @@
+t07 — A failed run, kept on purpose: MD5 hashes attacked as SHA-1 (-m 100)
+Date: 2026-10-30 08:58 UTC
+
+$ ./hashcat.bin -m 100 -a 0 md5.txt words.txt
+hashcat (v8.0.0) starting
+
+Initializing bridges. Please be patient...Initialized bridgesInitializing backend runtimes. Please be patient...Initialized backend runtimesInitializing backend devices. Please be patient...Initialized backend devicesOpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #01: cpu-skylake-avx512-AMD EPYC 9D25 126-Core Processor, 2911/5887 MB (1024 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Counting lines in /home/hatch/workspace/hashcat-labwork/run/md5.txt. Please be patient...Counted lines in /home/hatch/workspace/hashcat-labwork/run/md5.txtHash parsing error in hashfile: '/home/hatch/workspace/hashcat-labwork/run/md5.txt' on line 1 (8743b52063cd84097a65d1633f5c74f5): Token length exception near '8743b52063cd84097a65d1633f5c74f5' (40 required but only 32 entered)
+Hash parsing error in hashfile: '/home/hatch/workspace/hashcat-labwork/run/md5.txt' on line 2 (1119a110df24a17a303d7fd89ee59c4c): Token length exception near '1119a110df24a17a303d7fd89ee59c4c' (40 required but only 32 entered)
+Parsing Hashes: 0/2 (0.00%)...
+* Token length exception: 2/2 hashes
+  This error happens if the wrong hash type is specified, if the hashes are
+  malformed, or if input is otherwise not as expected (for example, if the
+  --username or --dynamic-x option is used but no username or dynamic-tag is present)
+
+No hashes loaded.
+
+Started: Fri Oct 30 08:58:41 2026
+Stopped: Fri Oct 30 08:58:41 2026
+[exit 244]

@@ -1,0 +1,26 @@
+t09 — Benchmarks on this machine, and everything the lab recovered
+Date: 2026-10-30 08:59 UTC
+(Startup lines trimmed as in t06; the speed lines are verbatim.)
+
+$ ./hashcat.bin -b -m 0        # MD5, optimised kernel
+* Hash-Mode 0 (MD5) [Kernel: optimized]
+Speed.#01........:   124.2 MH/s (16.63ms) @ Accel:1024 Loops:1024 Thr:1 Vec:16
+[exit 0]
+$ ./hashcat.bin -b -m 7400     # sha256crypt, 5000 iterations
+* Hash-Mode 7400 (sha256crypt $5$, SHA256 (Unix)) [Iterations: 5000] [Kernel: optimized]
+Speed.#01........:      554 H/s (74.38ms) @ Accel:106 Loops:1000 Thr:1 Vec:16
+[exit 0]
+
+Same two processors, both times. MD5 is about 224,000 times faster
+to test than sha256crypt (124,200,000 / 554) — that gap is not hashcat
+being clever or slow; it is the two hash designs doing exactly what
+they were built to do. (A repeat benchmark run ten minutes earlier
+read 113.7 MH/s and 499 H/s: the machine is shared, so treat every
+speed here as a range, not a constant.)
+
+$ cat hashcat.potfile   # the lab's whole haul, all invented passwords
+8743b52063cd84097a65d1633f5c74f5:hashcat
+1119a110df24a17a303d7fd89ee59c4c:bluebird7
+$5$labsalt42$JiFI1KKMJivdPzkRywVZ8TW8abH6zCIp2yp.QjcuPT9:trumpet99
+fa8dbbcb682699544e4e8f2212115f73:4071
+ccb113efbb2ac157a57b992ee08171c3:Bluebird7

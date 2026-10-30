@@ -1,0 +1,56 @@
+t08 — Rules: one base word, several small mutations
+Date: 2026-10-30 08:58 UTC
+(The run's routine startup lines are trimmed as in t06; the attack
+and the full closing status block are verbatim.)
+
+Target (made as in t02): the MD5 of Bluebird7 — capital B, trailing 7.
+The wordlist this time has bluebird but NOT bluebird7 or Bluebird7:
+$ grep -c bluebird words-nodigit.txt
+1
+$ cat lab.rule   # : do nothing, c capitalise, u uppercase, $x append x
+:
+c
+u
+$1
+$7
+c$1
+c$7
+c$9
+$ ./hashcat.bin -m 0 -a 0 bluebird7-cap.md5 words-nodigit.txt -r lab.rule
+hashcat (v8.0.0) starting
+* Filename..: /home/hatch/workspace/hashcat-labwork/run/words-nodigit.txt
+* Passwords.: 47
+* Bytes.....: 397
+* Speed.....: 1 MiB/s
+* Runtime...: 0.00s
+Loading rules. Please be patient...Loading rules finishedHashes: 1 digests; 1 unique digests, 1 unique salts
+Rules: 8
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Hash
+* Single-Salt
+* Raw-Hash
+[s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       ccb113efbb2ac157a57b992ee08171c3:Bluebird7
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Hash.Target......: ccb113efbb2ac157a57b992ee08171c3
+Time.Started.....: Fri Oct 30 08:58:55 2026 (0 secs)
+Time.Estimated...: Fri Oct 30 08:58:55 2026 (0 secs)
+Kernel.Feature...: Pure Kernel (password length 0-256 bytes)
+Guess.Base.......: Feed (/home/hatch/workspace/hashcat-labwork/run/words-nodigit.txt)
+Guess.Mod........: Rules (/home/hatch/workspace/hashcat-labwork/run/lab.rule)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:   373.7 kH/s (0.09ms) @ Accel:1024 Loops:8 Thr:1 Vec:16
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 376/376 (100.00%)
+Rejected.........: 0/376 (0.00%)
+Restore.Point....: 0/47 (0.00%), Amplifier:8
+Restore.Sub......: #01:0/0
+Candidate.Engine.: Device Generator
+Candidates.#01...: welcome1 -> Lagoon9
+Started: Fri Oct 30 08:58:50 2026
+Stopped: Fri Oct 30 08:58:56 2026
+[exit 0]

@@ -1,0 +1,73 @@
+t03 — Dictionary attack: two MD5 hashes, one 48-word list
+Date: 2026-10-30 08:57 UTC
+
+$ cat md5.txt
+8743b52063cd84097a65d1633f5c74f5
+1119a110df24a17a303d7fd89ee59c4c
+$ wc -l words.txt
+48
+$ ./hashcat.bin -m 0 -a 0 md5.txt words.txt
+hashcat (v8.0.0) starting
+
+Initializing bridges. Please be patient...Initialized bridgesInitializing backend runtimes. Please be patient...Initialized backend runtimesInitializing backend devices. Please be patient...Initialized backend devicesOpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+==================================================================================================================================================
+* Device #01: cpu-skylake-avx512-AMD EPYC 9D25 126-Core Processor, 2911/5887 MB (1024 MB allocatable), 2MCU
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Counting lines in /home/hatch/workspace/hashcat-labwork/run/md5.txt. Please be patient...Counted lines in /home/hatch/workspace/hashcat-labwork/run/md5.txtParsing Hashes: 1/2 (50.00%)...Parsed Hashes: 2/2 (100.00%)Sorting hashes. Please be patient...Sorted hashesRemoving duplicate hashes. Please be patient...Removed duplicate hashesSorting salts. Please be patient...Sorted saltsComparing hashes with potfile entries. Please be patient...Compared hashes with potfile entriesGenerating bitmap tables...Generated bitmap tablesInitializing feed plugin wordlist. Please be patient...Initialized feed plugin wordlistDictionary cache built:
+* Filename..: /home/hatch/workspace/hashcat-labwork/run/words.txt
+* Passwords.: 48
+* Bytes.....: 407
+* Speed.....: 2 MiB/s
+* Runtime...: 0.00s
+
+Hashes: 2 digests; 2 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes
+Rules: 1
+
+Optimizers applied:
+* Zero-Byte
+* Early-Skip
+* Not-Salted
+* Not-Iterated
+* Single-Salt
+* Raw-Hash
+
+ATTENTION! Pure (unoptimized) backend kernels selected.
+Pure kernels can crack longer passwords, but drastically reduce performance.
+If you want to switch to optimized kernels, append -O to your commandline.
+See the above message to find out about the exact limits.
+
+Watchdog: Hardware monitoring interface not found on your system.
+Watchdog: Temperature abort trigger disabled.
+
+Initializing bridge salts. Please be patient...Initialized bridge saltsInitializing device kernels and memory. Please be patient...Initializing backend runtime for device #1. Please be patient...Initialized backend runtime for device #1Host memory allocated for this attack: 513 MB (6000 MB free)
+
+Initialized device kernels and memoryStarting self-test. Please be patient...Finished self-testStarting autotune. Please be patient...Finished autotune                                                                                      [s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       Approaching final keyspace - workload adjusted.
+
+[s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       8743b52063cd84097a65d1633f5c74f5:hashcat
+[s]tatus [p]ause [r]ewind [a]dvance [b]ypass [c]heckpoint [f]inish [q]uit =>                                                                                       1119a110df24a17a303d7fd89ee59c4c:bluebird7
+                                                                                      
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 0 (MD5)
+Hash.Target......: /home/hatch/workspace/hashcat-labwork/run/md5.txt
+Time.Started.....: Fri Oct 30 08:57:14 2026 (0 secs)
+Time.Estimated...: Fri Oct 30 08:57:14 2026 (0 secs)
+Kernel.Feature...: Pure Kernel (password length 0-256 bytes)
+Guess.Base.......: Feed (/home/hatch/workspace/hashcat-labwork/run/words.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#01........:      536 H/s (0.04ms) @ Accel:1024 Loops:1 Thr:1 Vec:16
+Recovered........: 2/2 (100.00%) Digests (total), 2/2 (100.00%) Digests (new)
+Progress.........: 48/48 (100.00%)
+Rejected.........: 0/48 (0.00%)
+Restore.Point....: 0/48 (0.00%)
+Restore.Sub......: #01:0/0
+Candidate.Engine.: Host Generator + PCIe
+Candidates.#01...: welcome1 -> lagoon
+
+Started: Fri Oct 30 08:57:06 2026
+Stopped: Fri Oct 30 08:57:15 2026
+[exit 0]

@@ -1,0 +1,29 @@
+site_name: Hashcat for Mere Mortals
+site_description: Recovering and auditing your own passwords with hashcat. How password hashes work and why the weak ones fall, dictionary, mask and rules attacks run for real against hashes the lab made itself, and the measured gap between fast hashes and slow salted ones, with the rules and the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/hashcat-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text CC BY 4.0, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Hashcat Is: what-hashcat-is.md
+  - "The Rules — Your Hashes, Your Hardware": rules-of-the-game.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing Hashcat: installing-hashcat.md
+  - Your First Checks: first-checks.md
+  - Making Practice Hashes: making-practice-hashes.md
+  - The Dictionary Attack: the-dictionary-attack.md
+  - Proving the Crack: proving-the-crack.md
+  - The Mask Attack: the-mask-attack.md
+  - Rules and Other Attacks: rules-and-mutations.md
+  - Slow Hashes Fight Back: slow-hashes.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

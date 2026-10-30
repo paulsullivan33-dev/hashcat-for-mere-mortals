@@ -1,0 +1,21 @@
+t04 — Proving the result: --show, and the potfile that remembers
+Date: 2026-10-30 08:57 UTC
+
+$ ./hashcat.bin -m 0 md5.txt --show
+8743b52063cd84097a65d1633f5c74f5:hashcat
+1119a110df24a17a303d7fd89ee59c4c:bluebird7
+[exit 0]
+
+The release build keeps its potfile inside the hashcat folder:
+$ cat hashcat.potfile        # (run from the hashcat-8.0.0 folder)
+8743b52063cd84097a65d1633f5c74f5:hashcat
+1119a110df24a17a303d7fd89ee59c4c:bluebird7
+
+$ printf %s bluebird7 | md5sum   # hash the answer yourself, compare
+1119a110df24a17a303d7fd89ee59c4c  -
+
+Running the identical attack a second time does no new work:
+$ ./hashcat.bin -m 0 -a 0 md5.txt words.txt
+INFO: All hashes found as potfile and/or empty entries! Use --show to display them.
+      For more information, see https://hashcat.net/faq/potfile
+[the run ends in the same second it started; nothing was recomputed]

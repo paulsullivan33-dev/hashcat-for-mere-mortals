@@ -1,0 +1,10 @@
+t10 — Where hashes live in a shadow-style file, and taking just the hash
+Date: 2026-10-30 09:00 UTC
+
+An invented shadow line for an invented user (the hash is t02's):
+$ cat practice.shadow
+practice:$5$labsalt42$JiFI1KKMJivdPzkRywVZ8TW8abH6zCIp2yp.QjcuPT9:19800:0:99999:7:::
+$ cut -d: -f2 practice.shadow
+$5$labsalt42$JiFI1KKMJivdPzkRywVZ8TW8abH6zCIp2yp.QjcuPT9
+Field 2 is the hash. On a real system that file is /etc/shadow,
+readable only by root — which is why chapter 2's tests matter.
